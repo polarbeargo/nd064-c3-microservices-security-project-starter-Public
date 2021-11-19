@@ -67,41 +67,11 @@ Vagrant.configure("2") do |config|
       /usr/local/bin/helm ls --kubeconfig /etc/rancher/k3s/k3s.yaml --namespace=monitoring
       echo -e "******** Verify prometheus is installed ********"
       /usr/local/bin/kubectl get pods --namespace=monitoring
-      echo -e "******** Begin setup rke ********\n"
-      wget https://github.com/rancher/rke/releases/download/v1.3.2/rke_linux-amd64
-      sudo mv rke_linux-amd64 /usr/local/bin/rke
-      chmod +x /usr/local/bin/rke
-      sudo ssh-copy-id -i ~/.ssh/id_rsa root@192.168.50.101
-      sudo ssh-copy-id -i ~/.ssh/id_rsa root@192.168.50.102
-      echo "[TASK 2] Disable firewalld"
-      systemctl stop firewalld
-      systemctl disable firewalld
-      echo "[TASK 3] Disable apparmor"
-      systemctl stop apparmor
-      systemctl disable apparmor
-      echo "[TASK 4] Set up rke user"
-      useradd rke
-      usermod -a -G docker rke
-      systemctl restart docker
-      echo "[TASK 5] Copy auth_keys for rke user"
-      mkdir -p /home/rke/.ssh
-      usermod -d /home/rke/ rke
-      cp /root/.ssh/authorized_keys /home/rke/.ssh
-      chown rke /home/rke -R
-      /usr/local/bin/rke up
-      /usr/local/bin/rke --versio
-      echo -e "******** End installing rke ********\n\n"
       echo -e "******** Begin installing Falco ********\n"
       rpm --import https://falco.org/repo/falcosecurity-3672BA8F.asc
       curl -s -o /etc/zypp/repos.d/falcosecurity.repo https://falco.org/repo/falcosecurity-rpm.repo
       sudo zypper --non-interactive install falco
-      /usr/local/bin/helm install --kubeconfig kube_config_cluster.yml falco falcosecurity/falco \
-      --set falco.grpc.enabled=true --set falco.grpcOutput.enabled=true \
       echo -e "******** End installing Falco ********\n\n"
-      echo -e "******** Verify Falco is installed ********"
-      /usr/local/bin/kubectl --kubeconfig kube_config_cluster.yml get pod
-      /usr/local/bin/kubectl --kubeconfig kube_config_cluster.yml get ds
-      /usr/local/bin/kubectl --kubeconfig kube_config_cluster.yml get ds falco -o yaml | grep serviceAcc
     SHELL
     end
   end
