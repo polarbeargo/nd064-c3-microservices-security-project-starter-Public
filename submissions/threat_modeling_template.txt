@@ -1,0 +1,4 @@
+[Docker-bench]
+[FAIL] 3.1 Ensure that docker.service file ownership is set to root:root (Automated)
+[FAIL] 3.2 Ensure that docker.service file permissions are appropriately set (Automated)
+[FAIL] 3.3 Ensure that docker.socket file ownership is set to root:root (Automated)
