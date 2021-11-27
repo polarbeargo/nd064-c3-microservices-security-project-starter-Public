@@ -1,4 +1,44 @@
-[Docker-bench]
+Docker Threat Modeling
+Given Docker's system components and the STRIDE framework, identify five potential threats that may arise.Docker 
+
+Docker Client:
+Client compromise: the Docker desktop running on the administrator's machine
+Client authorization abuse: abuse of the client's authorization to make privileged changes
+Dockerfile misconfiguration: how the Dockerfile is built
+
+Spoofing - Client traffic from the Docker client to the Docker daemon or registry could be spoofed, or intercepted by a malicious party and replayed. Transport Layer Security (TLS) can be implemented to secure communication affecting the client.
+
+Docker Host:
+Isolation tampering: we are very concerned with namespace isolation to prevent container escape attacks
+Use of --privilege flag
+Insecure defaults
+Misconfiguration
+
+Tampering - Daemon configuration may be tampered with by a compromised client, leading to misconfiguration.
+
+Docker Registry - the largest attack surface:
+Image security
+Open Source Software (OSS) security
+Docker registry security
+
+Elevation of Privilege - Container image permissions may be elevated using the --privilege flag. Image libraries may contain security flaws. This can affect image security.
+
+Kubernetes Threat Modeling
+Given Kubernetes' system components and the STRIDE framework, identify five potential threats that may arise.
+
+Control plane - This is the lifeline of the Kubernetes API running many services. Internet access to both control planes and nodes should not be allowed to ensure your clusters are private.
+Node runtime - This is the node runtime components including kube-proxy and kubelet on the worker node.
+Cloud provider - This allows you to link your cluster into your cloud provider's API, and separates out the components that interact with that cloud platform from components that just interact with your cluster.
+
+Evaluating Kubernetes Control Plane Using STRIDE
+Denial of Service - excessive traffic to the API server can overwhelm the endpoint. kube-scheduler can incorrectly schedule the pod.
+
+Evaluating Kubernetes Node Runtime Using STRIDE
+
+Information Disclosure - Kube-proxy can expose sensitive information. To ensure the kube-proxy does not expose information, the --kubeconfig should be set to permissions 644 or less permissive.
+
+Docker-bench Run Results and Analysis
+From the failed findings, select and document 3 findings from the Docker-bench results that you want to harden based on the 5 attack surface areas you identified in Step 1. At least 1 of the 3 hardened findings should be different from the ones mentioned in the exercise (i.e. 5.10, 5.14, and 5.22).
 [FAIL] 3.1 Ensure that docker.service file ownership is set to root:root (Automated)
-[FAIL] 3.2 Ensure that docker.service file permissions are appropriately set (Automated)
-[FAIL] 3.3 Ensure that docker.socket file ownership is set to root:root (Automated)
+[FAIL] 5.10 Ensure that the memory usage for container is limited (Scored)
+[FAIL] 5.14 Ensure that the 'on-failure' container restart policy is set to '5' 
