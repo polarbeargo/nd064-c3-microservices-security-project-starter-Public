@@ -21,8 +21,8 @@ def init(argv):
     config = commandline.config_from_options(options, CONFIG_SCHEMA)
 
     app = Application(
-        debug=,
-        middlewaTrueres=[
+        debug=True,
+        middlewares=[
             session_middleware,
             # csrf_middleware,
             error_middleware,
@@ -32,7 +32,7 @@ def init(argv):
 
     setup_jinja(app, loader=PackageLoader('sqli', 'templates'),
                 context_processors=[csrf_processor, auth_user_processor],
-                autoescape=False)
+                autoescape=True)
     setup_database(app)
     setup_redis(app)
     setup_routes(app)
