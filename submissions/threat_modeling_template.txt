@@ -30,12 +30,14 @@ Control plane - This is the lifeline of the Kubernetes API running many services
 Node runtime - This is the node runtime components including kube-proxy and kubelet on the worker node.
 Cloud provider - This allows you to link your cluster into your cloud provider's API, and separates out the components that interact with that cloud platform from components that just interact with your cluster.
 
-Evaluating Kubernetes Control Plane Using STRIDE
+Evaluating Kubernetes Control Plane Using STRIDE:
 Denial of Service - excessive traffic to the API server can overwhelm the endpoint. kube-scheduler can incorrectly schedule the pod.
-
-Evaluating Kubernetes Node Runtime Using STRIDE
-
+Evaluating Kubernetes Node Runtime Using STRIDE:
 Information Disclosure - Kube-proxy can expose sensitive information. To ensure the kube-proxy does not expose information, the --kubeconfig should be set to permissions 644 or less permissive.
+I provide an example for only three aspects of STRIDE.
+Spoofing: Kubernetes ships with insecure defaults, for example, all pods have CAP_NET_RAW permissions. This allows all pods to open raw sockets and inject malicious packets into the Kubernetes container network, which may lead to spoofing.
+Repudiation: Kubernetes natively doesn't allow certificate revocation, which may lead to repudiation if a certificate cannot be revoked when necessary.
+Denial of Service: Kubernetes ships without an upper limit for setting the memory footprint. This may lead to a denial of service which could result in exhausting resources needed to run the pod.
 
 Docker-bench Run Results and Analysis
 From the failed findings, select and document 3 findings from the Docker-bench results that you want to harden based on the 5 attack surface areas you identified in Step 1. At least 1 of the 3 hardened findings should be different from the ones mentioned in the exercise (i.e. 5.10, 5.14, and 5.22).
