@@ -1,3 +1,16 @@
+[image1]: ./submissions/security_architecture_design.png
+[image2]: ./submissions/suse_docker_environment_out_of_box.png
+[image3]: ./submissions/suse_docker_environment_hardened.png
+[image4]: ./submissions/kube_cluster_out_of_box.png
+[image5]: ./submissions/kube_cluster_hardened.png
+[image6]: ./submissions/kube_pods_screenshot.png
+[image7]: ./submissions/falco_alert_screenshot.png
+[image8]: ./submissions/falco_alert_screenshot2.png
+[image9]: ./submissions/falco_grafana_screenshot.png
+[image10]: ./submissions/grype_app_hardended.png
+[image11]: ./submissions/grype_app_out_of_box.png
+
+
 ### Background
 Security is a highly dynamic topic with ever changing threats and priorities. Newsworthy topics ranging from fortune 500 companies like [Garmin](https://www.wired.com/story/garmin-ransomware-hack-warning) paying $10 million in ransom for ransomware attacks to supply chain attacks such as [Solarwinds](https://www.cnet.com/news/solarwinds-hack-officially-blamed-on-russia-what-you-need-to-know) are ever-present. 
 
@@ -16,4 +29,19 @@ No stress, you have tools and security incident response knowledge to respond ;)
 
 ### Project Instructions
 
-Follow the steps/instructions in the Udacity classroom to complete and submit the project.
+Follow the steps/instructions in the Udacity classroom to complete and submit the project.  
+
+## Results:  
+security_architecture_design| suse_docker_environment_out_of_box
+:-----------------:|:-----------------:|
+![][image1]        |![][image2]        |  
+suse_docker_environment_hardened 3.19, 3.22, 4.5| kube_cluster_out_of_box
+![][image3]        |![][image4]        |
+kube_cluster_hardened| kube_pods_screenshot |
+![][image5]        |![][image6]                  |
+falco_alert_screenshot| falco_alert_screenshot2|
+![][image7]        |![][image8]    
+falco_grafana_screenshot| grype_app_hardended|
+![][image9]        |![][image10] 
+grype_app_out_of_box| 
+![][image11]        | 
